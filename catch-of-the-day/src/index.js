@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 
 import StorePicker from './components/StorePicker'
 
-render(<StorePicker />, document.querySelector('#main'));
+ReactDOM.render(<StorePicker />, document.querySelector('#main'));
 
