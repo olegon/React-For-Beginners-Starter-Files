@@ -6,7 +6,9 @@ export default class StorePicker extends React.Component {
     goToStore (e) {
         e.preventDefault();
         
-        console.log(this.storeInput);
+        const storeId = this.storeInput.value;
+
+        this.context.router.transitionTo(`/store/${storeId}`);
     }
 
     render () {
@@ -20,3 +22,7 @@ export default class StorePicker extends React.Component {
         );
     }
 }
+
+StorePicker.contextTypes = {
+    router: React.PropTypes.object
+};
