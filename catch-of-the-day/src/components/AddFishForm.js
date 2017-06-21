@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class AddFishForm extends React.Component {
-    addFish(e) {
+    addFish (e) {
         e.preventDefault();
 
         const fish = {
@@ -17,7 +17,7 @@ export default class AddFishForm extends React.Component {
         this.fishForm.reset();
     }
 
-    render() {
+    render () {
         return (
             <form className="fish-edit" ref={ (el) => this.fishForm = el } onSubmit={ (e) => this.addFish(e) }>
                 <input type="text" placeholder="Fish Name" ref={ (el) => this.name = el }/>

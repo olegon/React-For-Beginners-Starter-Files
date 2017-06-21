@@ -9,6 +9,7 @@ export default class App extends React.Component {
         super();
 
         this.addFish = this.addFish.bind(this);
+        this.loadFishes = this.loadFishes.bind(this);
 
         this.state = {
             fishes: {},
@@ -25,6 +26,10 @@ export default class App extends React.Component {
         this.setState({ fishes });
     }
 
+    loadFishes (fishes) {
+        this.setState({ fishes });
+    }
+
     render () {
         return (
             <div className="catch-of-the-day">
@@ -32,7 +37,7 @@ export default class App extends React.Component {
                     <Header tagline="Fresh Seafood Market" />
                 </div>
                 <Order />
-                <Inventory addFish={ this.addFish } />
+                <Inventory addFish={ this.addFish } loadFishes={ this.loadFishes } />
             </div>
         );
     }
