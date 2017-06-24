@@ -5,6 +5,8 @@ import Order from './Order';
 import Inventory from './Inventory';
 import Fish from './Fish';
 
+import base from '../base';
+
 export default class App extends React.Component {
     constructor () {
         super();
@@ -17,6 +19,19 @@ export default class App extends React.Component {
             fishes: {},
             order: {}
         };
+    }
+
+    componentWillMount () {
+        const storeId = this.props.params.storeId;
+
+        this.ref = base.syncState(`${storeId}/fishes`, {
+            context: this,
+            state: 'fishes'
+        });
+    }
+
+    componentWillUnmount () {
+        base.removeBindind(this.ref);
     }
 
     addFish (fish) {
