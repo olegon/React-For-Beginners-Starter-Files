@@ -10,7 +10,7 @@ export default class Order extends React.Component {
             const count = order[key];
             const fish = fishes[key];
 
-            if (fish.status === 'available') {
+            if (fish && fish.status === 'available') {
                 return total + count * fish.price;   
             }
             else {

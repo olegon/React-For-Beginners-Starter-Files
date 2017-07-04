@@ -28,10 +28,25 @@ export default class App extends React.Component {
             context: this,
             state: 'fishes'
         });
+
+        
+        const orderJson = localStorage.getItem(`order-${storeId}`);
+        if (orderJson) {
+            const order = JSON.parse(orderJson);
+            console.log(order);
+            this.setState({ order });
+        }
     }
 
     componentWillUnmount () {
         base.removeBindind(this.ref);
+    }
+
+    componentWillUpdate (nextProps, nextState) {
+        const storeId = this.props.params.storeId;
+        const orderJson = JSON.stringify(nextState.order);
+
+        localStorage.setItem(`order-${storeId}`, orderJson);
     }
 
     addFish (fish) {
