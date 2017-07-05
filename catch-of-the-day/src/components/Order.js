@@ -37,6 +37,7 @@ export default class Order extends React.Component {
                 <li key={ key }>
                     <span>{count}lbs {fishName}</span>
                     <span className="price">{ formatPrice(count * fish.price) }</span>
+                    <button onClick={ _ => this.props.removeFishFromOrder(key) } >&times;</button>
                 </li>
             );
         }

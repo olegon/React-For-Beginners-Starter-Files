@@ -13,6 +13,8 @@ export default class App extends React.Component {
 
         this.addFish = this.addFish.bind(this);
         this.updateFish = this.updateFish.bind(this);
+        this.removeFish = this.removeFish.bind(this);
+        this.removeFishFromOrder = this.removeFishFromOrder.bind(this);
         this.loadFishes = this.loadFishes.bind(this);
         this.addToOrder = this.addToOrder.bind(this);
 
@@ -60,11 +62,28 @@ export default class App extends React.Component {
     }
 
     updateFish (key, updatedFish) {
-        const fishes = {...fishes};
+        const fishes = {...this.state.fishes};
 
         fishes[key] = updatedFish;
 
         this.setState({ fishes });
+    }
+
+    removeFish (key) {
+        const fishes = {...this.state.fishes};
+
+        // delete fishes[key];
+        fishes[key] = null; // para atualizar o Firebase!
+
+        this.setState({ fishes });
+    }
+
+    removeFishFromOrder (key) {
+        const order = {...this.state.order};
+
+        delete order[key];
+
+        this.setState({ order });
     }
 
     loadFishes (fishes) {
@@ -91,8 +110,16 @@ export default class App extends React.Component {
                         { Object.keys(fishes).map(key => <Fish key={ key } index={ key } addToOrder={ this.addToOrder } details={ fishes[key] } />) }
                     </ul>
                 </div> 
-                <Order fishes={ fishes } order={ order } />
-                <Inventory addFish={ this.addFish } loadFishes={ this.loadFishes } fishes={ this.state.fishes } updateFish={ this.updateFish } />
+                <Order
+                    fishes={ fishes }
+                    order={ order }
+                    removeFishFromOrder={ this.removeFishFromOrder } />
+                <Inventory
+                    addFish={ this.addFish }
+                    loadFishes={ this.loadFishes }
+                    fishes={ this.state.fishes }
+                    updateFish={ this.updateFish }
+                    removeFish={ this.removeFish } />
             </div>
         );
     }
