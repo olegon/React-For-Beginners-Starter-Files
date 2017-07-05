@@ -12,6 +12,7 @@ export default class App extends React.Component {
         super();
 
         this.addFish = this.addFish.bind(this);
+        this.updateFish = this.updateFish.bind(this);
         this.loadFishes = this.loadFishes.bind(this);
         this.addToOrder = this.addToOrder.bind(this);
 
@@ -58,6 +59,14 @@ export default class App extends React.Component {
         this.setState({ fishes });
     }
 
+    updateFish (key, updatedFish) {
+        const fishes = {...fishes};
+
+        fishes[key] = updatedFish;
+
+        this.setState({ fishes });
+    }
+
     loadFishes (fishes) {
         this.setState({ fishes });
     }
@@ -83,7 +92,7 @@ export default class App extends React.Component {
                     </ul>
                 </div> 
                 <Order fishes={ fishes } order={ order } />
-                <Inventory addFish={ this.addFish } loadFishes={ this.loadFishes } />
+                <Inventory addFish={ this.addFish } loadFishes={ this.loadFishes } fishes={ this.state.fishes } updateFish={ this.updateFish } />
             </div>
         );
     }
