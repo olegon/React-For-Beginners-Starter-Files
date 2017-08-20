@@ -5,3 +5,40 @@
   appear Must set transitionAppear={true} on animation component
 */
 
+.order-enter
+  max-height 0 !important
+  padding 0 !important
+  transform translateX(-120%)
+  transition all 500ms
+
+  &.order-enter-active
+    padding 2rem 0 !important
+    max-height 60px !important
+    transform translateX(0)
+
+.order-leave
+  transition all 500ms
+  transform translateX(0)
+  
+  &.order-leave-active
+    transform translateX(120%)
+    padding 0 !important
+    max-height 0 !important
+
+
+.count-enter
+  transition all 250ms
+  transform translateY(100%)
+  
+  &.count-enter-active
+    transform translateY(0)
+
+.count-leave
+  transition all 250ms
+  position absolute
+  left 0
+  bottom 0
+  transform translateY(0%)
+
+  &.count-leave-active
+    transform translateY(-100%)
