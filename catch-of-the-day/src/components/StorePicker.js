@@ -11,7 +11,7 @@ class StorePicker extends Component {
 
     render () {
         const { storeName } = this.state;
-
+        
         return (
             <form className="store-selector">
                 <h2>Please Enter a Store</h2>
