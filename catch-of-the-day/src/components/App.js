@@ -21,6 +21,19 @@ class App extends Component {
         this.setState({ fishes });
     }
 
+    addToOrder = (key) => {
+        const order = {...this.state.order};
+
+        if (key in order) {
+            order[key] += 1;
+        }
+        else {
+            order[key] = 1;
+        }
+
+        this.setState({ order });
+    }
+
     loadSampleFishes = () => {
         this.setState({
             fishes: sampleFishes
@@ -36,11 +49,17 @@ class App extends Component {
                         {
                             Object
                             .entries(this.state.fishes)
-                            .map(([key, fish]) => <Fish key={key} details={fish} />)
+                            .map(([id, fish]) => 
+                            <Fish
+                                key={id}
+                                fishId={id}
+                                details={fish}
+                                addToOrder={this.addToOrder}
+                            />)
                         }
                     </ul>
                 </div>
-                <Order></Order>
+                <Order order={this.state.order} fishes={this.state.fishes}></Order>
                 <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}></Inventory>
             </div>
         );
