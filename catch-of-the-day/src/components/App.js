@@ -22,15 +22,39 @@ class App extends Component {
         this.setState({ fishes });
     }
 
-    addToOrder = (key) => {
+    updateFish = (fishId, fish) => {
+        const fishes = {...this.state.fishes};
+
+        fishes[fishId] = fish;
+
+        this.setState({ fishes });
+    }
+
+    deleteFish = (fishId) => {
+        const fishes = {...this.state.fishes};
+
+        fishes[fishId] = null;
+
+        this.setState({ fishes }); 
+    }
+
+    addToOrder = (fishId) => {
         const order = {...this.state.order};
 
-        if (key in order) {
-            order[key] += 1;
+        if (fishId in order) {
+            order[fishId] += 1;
         }
         else {
-            order[key] = 1;
+            order[fishId] = 1;
         }
+
+        this.setState({ order });
+    }
+
+    removeFromOrder = (fishId) => {
+        const order = {...this.state.order};
+
+        delete order[fishId];
 
         this.setState({ order });
     }
@@ -78,6 +102,8 @@ class App extends Component {
     }
 
     render() {
+
+
         return (
             <div className="catch-of-the-day">
                 <div className="menu">
@@ -96,8 +122,16 @@ class App extends Component {
                         }
                     </ul>
                 </div>
-                <Order order={this.state.order} fishes={this.state.fishes}></Order>
-                <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}></Inventory>
+                <Order
+                    order={this.state.order}
+                    fishes={this.state.fishes}
+                    removeFromOrder={this.removeFromOrder} />
+                <Inventory
+                    addFish={this.addFish}
+                    updateFish={this.updateFish}
+                    deleteFish={this.deleteFish}
+                    loadSampleFishes={this.loadSampleFishes}
+                    fishes={this.state.fishes} />
             </div>
         );
     }

@@ -14,7 +14,7 @@ class Order extends Component {
         if (isAvailable) {
             const price =  count * fish.price;
 
-            return <li key={fishId}>{count} - {fish.name} - {formatPrice(price)}</li>
+            return <li key={fishId}>{count} - {fish.name} - {formatPrice(price)} <button onClick={() => this.props.removeFromOrder(fishId)}>&times;</button></li>
         }
         else {
             return <li key={fishId}>Sorry, but this fish isn't available.</li>
