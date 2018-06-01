@@ -40,10 +40,7 @@ class Order extends Component {
                         .entries(order)
                         .map(([id, count]) => this.renderOrderItem(id, count))
                     }
-
-                    
                 </ul>
-
                 {
                     this.renderOrdemTotal(fishes, order)
                 }
