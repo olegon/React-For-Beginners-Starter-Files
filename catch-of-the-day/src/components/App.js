@@ -4,6 +4,7 @@ import Header from './Header';
 import Inventory from './Inventory';
 import Order from './Order';
 import Fish from './Fish';
+import base from '../base';
 
 import sampleFishes from '../sample-fishes';
 
@@ -38,6 +39,18 @@ class App extends Component {
         this.setState({
             fishes: sampleFishes
         });
+    }
+
+    componentDidMount() {
+        const { storeId } = this.props.match.params;
+        this.ref = base.syncState(`${storeId}/fishes`, {
+            context: this,
+            state: 'fishes'
+        });
+    }
+
+    componentWillUnmount() {
+        base.removeBinding(this.ref);
     }
 
     render() {
