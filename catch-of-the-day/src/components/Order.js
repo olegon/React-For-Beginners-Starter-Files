@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { formatPrice } from '../helpers';
 
 class Order extends Component {
@@ -14,7 +15,9 @@ class Order extends Component {
         if (isAvailable) {
             const price =  count * fish.price;
 
-            return <li key={fishId}>{count} - {fish.name} - {formatPrice(price)} <button onClick={() => this.props.removeFromOrder(fishId)}>&times;</button></li>
+            return (<CSSTransition classNames="order" key={fishId} timeout={{ enter: 250, exit: 250 }}>
+                <li key={fishId}>{count} - {fish.name} - {formatPrice(price)} <button onClick={() => this.props.removeFromOrder(fishId)}>&times;</button></li>
+            </CSSTransition>)
         }
         else {
             return <li key={fishId}>Sorry, but this fish isn't available.</li>
@@ -37,13 +40,13 @@ class Order extends Component {
         return (
             <div className="order-wrap">
                 <h2>Order</h2>
-                <ul className="order">
+                <TransitionGroup component="ul" className="order">
                     {
                         Object
                         .entries(order)
                         .map(([id, count]) => this.renderOrderItem(id, count))
                     }
-                </ul>
+                </TransitionGroup>
                 {
                     this.renderOrdemTotal(fishes, order)
                 }
