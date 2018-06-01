@@ -6,7 +6,10 @@ class Order extends Component {
     renderOrderItem(fishId, count) {
         const { fishes } = this.props;
         const fish = fishes[fishId];
-        const isAvailable = fish && fish.status === 'available';
+        
+        if (fish == null) return null; // Renders nothing
+
+        const isAvailable = fish.status === 'available';
 
         if (isAvailable) {
             const price =  count * fish.price;

@@ -43,10 +43,34 @@ class App extends Component {
 
     componentDidMount() {
         const { storeId } = this.props.match.params;
+
+        const localStoregeOrderRef = localStorage.getItem(`${storeId}-order`);
+
+        if (localStoregeOrderRef) {
+            try {
+                const order = JSON.parse(localStoregeOrderRef);
+                this.setState({
+                    order
+                });
+            }
+            catch (err) {
+                console.error('Invalid localStorege order: ', err);
+            }
+
+        }
+
         this.ref = base.syncState(`${storeId}/fishes`, {
             context: this,
             state: 'fishes'
         });
+    }
+
+
+    componentDidUpdate() {
+        const { storeId } = this.props.match.params;
+        const { order } = this.state;
+
+        localStorage.setItem(`${storeId}-order`, JSON.stringify(order));
     }
 
     componentWillUnmount() {
