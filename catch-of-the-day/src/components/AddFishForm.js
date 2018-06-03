@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddFishForm extends Component {
+    static propTypes = {
+        addFish: PropTypes.func.isRequired
+    }
+
+
     nameRef = React.createRef();
     priceRef = React.createRef();
     statusRef = React.createRef();
     descRef = React.createRef();
     imageRef = React.createRef();
-
+   
     handleSubmit = (event) => {
         event.preventDefault();
 
